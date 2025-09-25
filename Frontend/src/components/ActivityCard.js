@@ -35,12 +35,14 @@ const ActivityCard = ({ activity }) => {
   };
 
   return (
-    <div className="flex items-center space-x-4 p-3 bg-gray-50 rounded-lg">
-      <div className="text-2xl">{getActivityIcon(activity.type)}</div>
-      <div className="flex-1">
-        <div className="font-bold text-gray-800">{getActivityLabel(activity.type)}</div>
-        <div className="text-sm text-gray-600">{activity.crop} • {activity.date}</div>
-        {activity.notes && <div className="text-sm text-gray-500 mt-1">{activity.notes}</div>}
+    <div className="flex items-center space-x-3 p-2 sm:p-3 bg-gray-50 rounded-lg">
+      <div className="text-xl sm:text-2xl">{getActivityIcon(activity.type)}</div>
+      <div className="flex-1 min-w-0">
+        <div className="font-bold text-gray-800 text-sm sm:text-base truncate">{getActivityLabel(activity.type)}</div>
+        <div className="text-xs sm:text-sm text-gray-600 truncate">{activity.crop} • {activity.date}</div>
+        {activity.notes && (
+          <div className="text-xs sm:text-sm text-gray-500 mt-1 truncate">{activity.notes}</div>
+        )}
       </div>
     </div>
   );

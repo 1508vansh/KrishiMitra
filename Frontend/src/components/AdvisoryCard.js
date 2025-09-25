@@ -17,15 +17,15 @@ const AdvisoryCard = () => {
   );
 
   return (
-    <div className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg shadow-lg p-6 mb-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h3 className="text-lg font-bold mb-2">
+    <div className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
+      <div className="flex flex-col sm:flex-row items-center justify-between">
+        <div className="flex-1 text-center sm:text-left mb-3 sm:mb-0">
+          <h3 className="text-base sm:text-lg font-bold mb-1 sm:mb-2">
             🔔 {getText('Current Advisory', 'നിലവിലെ ഉപദേശം', 'वर्तमान सलाह')}
           </h3>
-          <p className="text-green-100">{advisory}</p>
+          <p className="text-green-100 text-sm sm:text-base">{advisory}</p>
         </div>
-        <div className="text-4xl">🌤️</div>
+        <div className="text-3xl sm:text-4xl">🌤️</div>
       </div>
     </div>
   );

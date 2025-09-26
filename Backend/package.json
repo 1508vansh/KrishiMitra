@@ -1,8 +1,7 @@
 {
   "scripts": {
      "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
-    "build": "babel src -d dist"
+    "dev": "nodemon src/server.js"
   },
   "dependencies": {
     "@google/genai": "^1.20.0",

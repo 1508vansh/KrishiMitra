@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import axiosClient from '../utils/axiosClient';
+import Loader from '../utils/Loader';
 const AskAssistantModal = ({ onClose }) => {
   const { language } = useSelector(state => state.auth);
   const [question, setQuestion] = useState('');
   const [response, setResponse] = useState('');
+  const [isSending,setIsSending] = useState(false);
 
   const getText = (english, malayalam, hindi) => {
     if (language === 'malayalam') return malayalam;
@@ -18,13 +20,22 @@ const AskAssistantModal = ({ onClose }) => {
     getText('Which fertilizer to use?', 'ഏത് വളം ഉപയോഗിക്കണം?', 'कौन सा उर्वरक उपयोग करें?')
   ];
 
-  const handleAsk = () => {
+  const handleAsk = async() => {
+    try{
+      if(question==='')return;
+      if(question.length<=1)return;
+      setIsSending(true);
+      const response = await axiosClient.post('/handleAi',{message:question});
+      console.log(response);
+      const data = response?.data;
+      console.log("this is ai response :",data);
+      const message = data?.message;
+      setResponse(getText(message,message,message));
+      setIsSending(false);
+    }catch(err){
+      console.log("Error in ai response!");
+    }
     // Mock AI response
-    setResponse(getText(
-      'Thank you for your question! I am an AI farming assistant. In the real application, I will provide personalized answers using Gemini API.',
-      'നിങ്ങളുടെ ചോദ്യത്തിന് നന്ദി! ഞാൻ കൃഷി വിദഗ്ദ്ധനായ AI സഹായിയാണ്. യഥാർത്ഥ ആപ്ലിക്കേഷനിൽ, ഞാൻ Gemini API ഉപയോഗിച്ച് വ്യക്തിഗതമായ ഉത്തരങ്ങൾ നൽകും.',
-      'आपके प्रश्न के लिए धन्यवाद! मैं एक AI कृषि सहायक हूं। वास्तविक एप्लिकेशन में, मैं जेमिनी API का उपयोग करके व्यक्तिगत उत्तर प्रदान करूंगा।'
-    ));
   };
 
   return (
@@ -70,7 +81,16 @@ const AskAssistantModal = ({ onClose }) => {
           </div>
 
           {/* Response */}
-          {response && (
+          {
+            isSending && 
+           <div className="bg-green-50 p-2 sm:p-4 rounded-lg">
+              <div className="font-bold text-green-800 mb-1 sm:mb-2 text-sm sm:text-base">
+                {getText('AI Assistant Response', 'AI സഹായിയുടെ പ്രതികരണം', 'AI सहायक प्रतिक्रिया')}
+              </div>
+              <div className="text-green-700 text-sm sm:text-base">{<Loader/>}</div>
+            </div>
+           }
+          {response && !isSending && (
             <div className="bg-green-50 p-2 sm:p-4 rounded-lg">
               <div className="font-bold text-green-800 mb-1 sm:mb-2 text-sm sm:text-base">
                 {getText('AI Assistant Response', 'AI സഹായിയുടെ പ്രതികരണം', 'AI सहायक प्रतिक्रिया')}

@@ -27,7 +27,7 @@ const Header = () => {
               <span className="text-green-600 text-xl sm:text-2xl">🌱</span>
             </div>
             <div className="text-center sm:text-left">
-              <h1 className="text-lg sm:text-xl font-bold">Krishi Sakhi</h1>
+              <h1 className="text-lg sm:text-xl font-bold">Krishi Mitra</h1>
               <p className="text-green-200 text-xs sm:text-sm">{getText('AI Farming Assistant', 'AI കൃഷി സഹായി', 'AI कृषि सहायक')}</p>
             </div>
           </div>

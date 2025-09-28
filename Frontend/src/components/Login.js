@@ -43,7 +43,7 @@ const Login = () => {
               <span className="text-green-600 text-xl sm:text-2xl">🌾</span>
             </div>
             <div>
-              <h1 className="text-xl sm:text-2xl font-bold">Krishi Sakhi</h1>
+              <h1 className="text-xl sm:text-2xl font-bold">Krishi Mitra</h1>
               <p className="text-green-200 text-xs sm:text-sm">Government of Kerala</p>
             </div>
           </div>
